@@ -21,11 +21,13 @@ class ViewController: UIViewController {
     @IBAction func tipChanged(_ sender: UIButton) {
         clearTipSelections()
         sender.isSelected = true
+        dismissKeyboard()
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         splitNumberLabel.text = String(format: "%.0f", sender.value)
         split = Int(sender.value)
+        dismissKeyboard()
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
@@ -37,12 +39,17 @@ class ViewController: UIViewController {
         } else if twentyPctButton.isSelected {
             print("20%")
         }
+        
     }
     
     func clearTipSelections() {
         zeroPctButton.isSelected = false
         tenPctButton.isSelected = false
         twentyPctButton.isSelected = false
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
