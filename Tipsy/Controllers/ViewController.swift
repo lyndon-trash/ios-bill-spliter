@@ -17,17 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
 
     @IBAction func tipChanged(_ sender: UIButton) {
-        switch sender {
-        case zeroPctButton:
-            print("Poor")
-        case tenPctButton:
-            print("Nice")
-        case twentyPctButton:
-            print("$$$$$")
-        default:
-            print("Error")
-        }
-        
+        clearTipSelections()
+        sender.isSelected = true
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -35,8 +26,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print("Calculate")
+        if zeroPctButton.isSelected {
+            print("0%")
+        } else if tenPctButton.isSelected {
+            print("10%")
+        } else if twentyPctButton.isSelected {
+            print("20%")
+        }
     }
     
+    func clearTipSelections() {
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
+    }
 }
 
