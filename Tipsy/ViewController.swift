@@ -10,11 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var billTextField: UITextField!
+    @IBOutlet weak var zeroPctButton: UIButton!
+    @IBOutlet weak var tenPctButton: UIButton!
+    @IBOutlet weak var twentyPctButton: UIButton!
+    @IBOutlet weak var splitNumberLabel: UILabel!
+
+    @IBAction func tipChanged(_ sender: UIButton) {
+        switch sender {
+        case zeroPctButton:
+            print("Poor")
+        case tenPctButton:
+            print("Nice")
+        case twentyPctButton:
+            print("$$$$$")
+        default:
+            print("Error")
+        }
+        
     }
-
-
+    
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        print("Changed Split")
+    }
+    
+    @IBAction func calculatePressed(_ sender: UIButton) {
+        print("Calculate")
+    }
+    
 }
 
