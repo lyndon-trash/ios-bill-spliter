@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        print("Changed Split")
+        splitNumberLabel.text = String(format: "%.0f", sender.value)
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
