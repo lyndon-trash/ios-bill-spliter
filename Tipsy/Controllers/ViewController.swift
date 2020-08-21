@@ -16,9 +16,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var twentyPctButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
     
-    var split = 2
+    var calculator = TipCalculator()
 
     @IBAction func tipChanged(_ sender: UIButton) {
+        if zeroPctButton == sender {
+            calculator.tipPercent = .zero
+        } else if tenPctButton == sender {
+            calculator.tipPercent = .ten
+        } else if twentyPctButton == sender {
+            calculator.tipPercent = .twenty
+        }
+        
         clearTipSelections()
         sender.isSelected = true
         dismissKeyboard()
@@ -26,20 +34,16 @@ class ViewController: UIViewController {
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         splitNumberLabel.text = String(format: "%.0f", sender.value)
-        split = Int(sender.value)
+        calculator.split = Int(sender.value)
         dismissKeyboard()
     }
     
-    @IBAction func calculatePressed(_ sender: UIButton) {
-        print("Split: \(split)")
-        if zeroPctButton.isSelected {
-            print("0%")
-        } else if tenPctButton.isSelected {
-            print("10%")
-        } else if twentyPctButton.isSelected {
-            print("20%")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let resultVC: ResultsViewController = segue.destination as? ResultsViewController {
+            let amtStr: String = billTextField.text ?? "0.0"
+            calculator.transactionAmount = Float(amtStr) ?? 0.0
+            resultVC.tip = calculator.calculate()
         }
-        
     }
     
     func clearTipSelections() {
